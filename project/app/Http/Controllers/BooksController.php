@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
+use App\Models\Author;
 use Illuminate\Http\Request;
 
 class BooksController extends Controller
@@ -12,11 +13,11 @@ class BooksController extends Controller
     {
         //$booklist = Book::all();
         $booklist = Book::orderBy('title', 'ASC')->simplePaginate(50);
-
+        $authors = Author::all();
 
         return view('books.books', [
             'books' => $booklist,
-        
+            'authors' => $authors,
         ]);
 
     }
@@ -27,7 +28,7 @@ class BooksController extends Controller
         $data = request()->validate([
             'title' => 'required|min:3',
             'isbn' => 'required|digits:8',
-            'author' => 'required',
+            'authors_id' => 'required',
             'pages' => 'required'
         ]);
         
