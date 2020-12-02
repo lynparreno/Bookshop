@@ -29,7 +29,7 @@
                <tr>
                   <td>{{ $booklist->isbn }}</td>
                   <td><a href="/books/{{ $booklist->id }}">{{ $booklist->title }}</td>
-                  <td>{{ $booklist->author }}</td>
+                  <td>{{ $booklist->authors->initials }}, {{$booklist->authors->lastname}}</td>
                </tr>
                @endforeach
             </tbody>
