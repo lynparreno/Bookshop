@@ -26,7 +26,16 @@
 
             <div class="form-group">
                <label for="author">Author:</label>
-               <input type="text" name="author" value="{{ old('author') }}" class="form-control">
+               <select class="form-control"  name="authors_id" id="authors_id">
+                  <option>--Select Author--</option>
+                  @foreach($authors as $author)
+                     <option value="{{ $author->id }}" 
+                        @if($author->id === $books->authors->id)
+                        selected
+                        @endif
+                     >{{ $author->lastname }}, {{ $author->initials }} </option>
+                  @endforeach
+               </select>
             </div>
             <div class="text-danger">{{ $errors->first('author') }}</div>
 
