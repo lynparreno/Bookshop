@@ -25,10 +25,13 @@ Route::get('/', function () {
 
 //Route::get('books', 'App\Http\Controllers\BooksController@listBooks')->title('booklist');
 Route::get('/books', 'App\Http\Controllers\BooksController@listBooks');
-Route::post('/books', 'App\Http\Controllers\BooksController@store');
+//Route::post('/books', 'App\Http\Controllers\BooksController@store');
 Route::view('contact', 'contact');
 Route::view('add', 'books/add');
 Route::post('add', 'App\Http\Controllers\BooksController@store');
-Route::get('/books/{id}', 'App\Http\Controllers\BooksController@showDetails');
+Route::post('/books/{id}', 'App\Http\Controllers\BooksController@showDetails');
+Route::PATCH('/books/{id}', 'App\Http\Controllers\BooksController@updateDetails');
+
+Route::get('/authors', 'App\Http\Controllers\AuthorsController@listAuthors');
 //Route::view('books', 'books/books');
 
