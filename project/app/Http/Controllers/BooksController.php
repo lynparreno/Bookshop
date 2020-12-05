@@ -33,15 +33,30 @@ class BooksController extends Controller
         ]);
         
         Book::create($data);
-
         return redirect('/books')->with('success', 'Item has been successfully added in the database');
     }
 
-    public function showDetails($id){
+    public function showDetails($id)
+    {
         $books = Book::find($id);
+        $authors = Author::all();
         //$books = Book::all();
         return view('books.show', [
             'books' => $books,
+            'authors' => $authors,
         ]);
+    }
+
+    public function updateDetails($id)
+    {
+        $books = Book::find($id);
+
+        $books->isbn = request('isbn');
+        $books->title = request('title');
+        $books->authors_id = request('authors_id');
+        $books->pages = request('pages');
+
+        $books->save();
+        return redirect('/books')->with('success', 'Item has been successfully updated');
     }
 }
