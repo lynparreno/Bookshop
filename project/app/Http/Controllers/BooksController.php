@@ -36,11 +36,23 @@ class BooksController extends Controller
         return redirect('/books')->with('success', 'Item has been successfully added in the database');
     }
 
+    public function addBook()
+    {
+        $books = Book::all();
+        $authors = Author::orderBy('lastname', 'ASC')->get();
+
+        return view('books.add', [
+            'books' => $books,
+            'authors' => $authors,
+        ]);
+    }
+
     public function showDetails($id)
     {
         $books = Book::find($id);
-        $authors = Author::all();
-        //$books = Book::all();
+        //$authors = Author::all();
+        $authors = Author::orderBy('lastname', 'ASC')->get();
+
         return view('books.show', [
             'books' => $books,
             'authors' => $authors,
@@ -50,7 +62,7 @@ class BooksController extends Controller
     public function updateDetails($id)
     {
         $books = Book::find($id);
-
+        
         $books->isbn = request('isbn');
         $books->title = request('title');
         $books->authors_id = request('authors_id');
