@@ -3,15 +3,15 @@
 @section('title', 'Add New Book')
 
 @section('content')
-    <div class="row">
-        <div class="col-12">
-            <h1 class="pt-4">Add New Book</h1>
-        </div>
-    </div>
+   <div class="row">
+      <div class="col-12">
+         <h1 class="pt-4">Add New Book</h1>
+      </div>
+   </div>
 
     <div class="row">
       <div class="col-12">
-         <form action="books" method="POST" class="pb-5">
+         <form action="" method="POST" class="pb-5">
             <div class="form-group">
                <label for="title">Title:</label>
                <input type="text" name="title" value="{{ old('title') }}" class="form-control">
@@ -25,19 +25,14 @@
             <div class="text-danger">{{ $errors->first('isbn') }}</div>
 
             <div class="form-group">
-               <label for="author">Author:</label>
-               <select class="form-control"  name="authors_id" id="authors_id">
-                  <option>--Select Author--</option>
+            <label for="author">Author:</label>
+            <select class="form-control" id="authors_id" name="authors_id">
+               <option value="">--Select Author--</option>
                   @foreach($authors as $author)
-                     <option value="{{ $author->id }}" 
-                        @if($author->id === $books->authors->id)
-                        selected
-                        @endif
-                     >{{ $author->lastname }}, {{ $author->initials }} </option>
+                     <option value="{{ $author->id }}">{{ $author->lastname }}, {{ $author->initials }} </option> 
                   @endforeach
-               </select>
-            </div>
-            <div class="text-danger">{{ $errors->first('author') }}</div>
+            </select>
+         </div>
 
             <div class="form-group">
                <label for="pages">No. of Pages:</label>
