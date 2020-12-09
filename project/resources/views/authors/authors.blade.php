@@ -10,26 +10,26 @@
     </div>
     <div class="row">
         <div class="col-3">
-            <div class="bg-success text-light">
+            <div class="bg-success text-light rounded">
                 <div class="inner">
-                    <h3></h3>
-                    <p>Average Books Written Per Author</p>
+                    <h3 class="text-center">{{ round($averagebooks->avg('bookcount')) }}</h3>
+                    <p class="text-center">Average Books Written</p>
                 </div>
             </div>
         </div>
         <div class="col-3">
-            <div class="bg-warning">
+            <div class="bg-warning text-light rounded">
                 <div class="inner">
-                    <h3>{{ round($authors->avg('age')) }}</h3>
-                    <p>Average Age</p>
+                    <h3 class="text-center">{{ round($ave_age->avg('age')) }}</h3>
+                    <p class="text-center">Average Age</p>
                 </div>
             </div>
         </div>
         <div class="col-3">
-            <div class="bg-primary text-light">
+            <div class="bg-primary text-light rounded">
                 <div class="inner">
-                    <h3>{{ $numcountries->count() }}</h3>
-                    <p>No. of Different Countries of Origin</p>
+                    <h3 class="text-center">{{ $numcountries->count() }}</h3>
+                    <p class="text-center">No. of Different Countries of Origin</p>
                 </div>
             </div>
         </div>
@@ -39,6 +39,7 @@
         <div class="col-12 d-flex justify-content-end">
             <a class="btn btn-primary" href="#" role="button">Add New Author</a>
         </div>
+        
     </div>
 
     <div class="row">

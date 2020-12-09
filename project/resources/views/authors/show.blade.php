@@ -31,7 +31,7 @@
             <div class="text-danger">{{ $errors->first('country') }}</div>
 
             <div class="form-group">
-                <label for="listbooks">List of Books Published</label>
+                <label for="listbooks">List of Books Written:</label>
                 <ul>
                     @foreach($books as $book)
                         <li>{{ $book->title }}</li>
