@@ -56,7 +56,7 @@
                 <tbody>
                 @foreach($authors as $author)
                 <tr>
-                    <td><a href="/authors/{{ $author->id }}">{{ $author->lastname }}, {{ $author->initials }}</td>
+                    <td><a href="/authors/{{ $author->id }}">{{ $author->full_name }}</td>
                     <td>{{ $author->age }}</td>
                     <td>{{ $author->country }}</td>
                     <td><a href="/authors/{{$author->id}}/edit">Edit</td>
