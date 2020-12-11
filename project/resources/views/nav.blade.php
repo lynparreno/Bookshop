@@ -10,10 +10,13 @@
                 <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="books">List</a>
-            </li>   
+                <a class="nav-link" href="/books">Books</a>
+            </li> 
             <li class="nav-item">
-                <a class="nav-link" href="contact">Contact Us</a>
+                <a class="nav-link" href="/authors">Authors</a>
+            </li> 
+            <li class="nav-item">
+                <a class="nav-link" href="/contact">Contact Us</a>
             </li>  
         </ul>
         <form class="form-inline my-2 my-lg-0">

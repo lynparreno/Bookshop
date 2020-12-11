@@ -1,37 +1,49 @@
-<<!DOCTYPE html>
-<html>
-<head>
-   <meta charset="utf-8" />
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <title>Testing</title>
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-</head>
-<body>
-   <div class="container">
-      <table class="table table-striped">
-         <thead>
-         <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Author</th>
-         </tr>
-         </thead>
-         <tbody>
-            @foreach($books as $booklist)
-            <tr>
-               <td>{{ $booklist->id }}</td>
-               <td>{{ $booklist->title }}</td>
-               <td>{{ $booklist->author }}</td>
+@extends('layout')
+
+@section('title', 'List of Available Books')
+
+@section('content')
+   <div class="row">
+      <div class="col-12">
+         <h1 class="pt-4">Available Books</h1>
+      </div>
+   </div>
+   <div class="row pb-4">
+      <div class="col-12 d-flex justify-content-end">
+         <a class="btn btn-primary" href="/books/create" role="button">Add New Book</a>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="col-12">
+         <table class="table table-striped">
+            <thead>
+            <tr class="table-primary">
+               <th>ISBN</th>
+               <th>Title</th>
+               <th>Author</th>
+               <th></th>
             </tr>
-            @endforeach
-         </tbody>
-      </table>
-      <div class="row">
-         <div class="col-24 text-center">
-            {{ $books->links() }}
+            </thead>
+            <tbody>
+               @foreach($books as $booklist)
+               <tr>
+                  <td>{{ $booklist->isbn }}</td>
+                  <td><a href="/books/{{ $booklist->id }}">{{ $booklist->title }}</td>
+                  <td><a href="/authors/{{$booklist->authors_id}}">{{$booklist->authors->lastname}}, {{ $booklist->authors->initials }}</td>
+                  <td><a href="/books/{{$booklist->id}}/edit">Edit</td>
+               </tr>
+               @endforeach
+            </tbody>
+         </table>
+         
+         <div class="row">
+            <div class="col-12 text-left">
+               {{ $books->links() }}
+            </div>
          </div>
       </div>
    </div>
-</body>
-</html>
+      
+
+@endsection

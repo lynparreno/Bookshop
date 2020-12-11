@@ -9,9 +9,9 @@
       </div>
    </div>
 
-    <div class="row">
+   <div class="row">
       <div class="col-12">
-         <form action="" method="POST" class="pb-5">
+         <form action="/books" method="POST" class="pb-5">
             <div class="form-group">
                <label for="title">Title:</label>
                <input type="text" name="title" value="{{ old('title') }}" class="form-control">
@@ -39,9 +39,9 @@
                <input type="text" name="pages" value="{{ old('pages') }}" class="form-control">
             </div>
             <div class="text-danger">{{ $errors->first('pages') }}</div>
-
-            <button class="btn btn-primary" type="submit">Add Book</button>
             @csrf
+            <button class="btn btn-primary" type="submit">Save</button>
+            <a class="btn btn-primary" href="/books" role="button">Back</a>
       
          </form>
       </div>

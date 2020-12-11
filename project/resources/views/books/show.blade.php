@@ -1,46 +1,35 @@
 @extends('layout')
 
-@section('title', 'Edit Books')
+@section('title', 'Details of '.$books->title)
 
 @section('content')
 <div class="row">
    <div class="col-12">
    <form action="" method="POST" class="pb-5">
+         <div class="col-12">
+            <h1>Info of {{ $books->title }}</h1>
+         </div>
          <div class="form-group">
             <label for="title">Title:</label>
-            <input type="text" name="title" value="{{ $books->title }}" class="form-control">
+            <input type="text" name="title" value="{{ $books->title }}" class="form-control" disabled>
          </div>
-         <div class="text-danger">{{ $errors->first('title') }}</div>
          
          <div class="form-group">
             <label for="isbn">ISBN:</label>
-            <input type="text" name="isbn" value="{{ $books->isbn }}" class="form-control">
+            <input type="text" name="isbn" value="{{ $books->isbn }}" class="form-control" disabled>
          </div>
-         <div class="text-danger">{{ $errors->first('isbn') }}</div>
       
          <div class="form-group">
             <label for="author">Author:</label>
-            <select class="form-control"  name="authors_id" id="authors_id">
-               <option>--Select Author--</option>
-               @foreach($authors as $author)
-                  <option value="{{ $author->id }}" 
-                     @if($author->id === $books->authors->id)
-                     selected
-                     @endif
-                  >{{ $author->lastname }}, {{ $author->initials }} </option>
-               @endforeach
-            </select>
+            <input type="text" name="authors" value="{{ $books->authors->lastname }}, {{ $books->authors->initials }}" class="form-control" disabled>
          </div>
-         <div class="text-danger">{{ $errors->first('author') }}</div>
 
          <div class="form-group">
             <label for="pages">No. of Pages:</label>
-            <input type="text" name="pages" value="{{ $books->pages }}" class="form-control">
+            <input type="text" name="pages" value="{{ $books->pages }}" class="form-control" disabled>
          </div>
-         <div class="text-danger">{{ $errors->first('pages') }}</div>
          @csrf
-         @method('PATCH')
-         <button class="btn btn-primary" type="submit">Update</button>
+         <a class="btn btn-primary" href="/books" role="button">Back</a>
       </form>
    </div> 
 </div>
