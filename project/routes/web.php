@@ -13,27 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-
-});
-
-/*Route::get('/books/{id}', function () {
-    return view('books.show');
-
-});*/
-
-//Route::get('books', 'App\Http\Controllers\BooksController@listBooks')->title('booklist');
-Route::get('/books', 'App\Http\Controllers\BooksController@listBooks');
-//Route::post('/books', 'App\Http\Controllers\BooksController@store');
+Route::view('/', 'home');
 Route::view('contact', 'contact');
-//Route::view('/books/add', 'books/add');
-Route::get('/add', 'App\Http\Controllers\BooksController@addBook');
-Route::post('/add', 'App\Http\Controllers\BooksController@store');
-Route::get('/books/{id}', 'App\Http\Controllers\BooksController@showDetails');
-Route::PATCH('/books/{id}', 'App\Http\Controllers\BooksController@updateDetails');
 
-Route::get('/authors', 'App\Http\Controllers\AuthorsController@listAuthors');
-Route::get('/authors/{id}', 'App\Http\Controllers\AuthorsController@authorDetails');
-//Route::view('books', 'books/books');
+Route::get('/books', 'App\Http\Controllers\BooksController@index');
+Route::get('/books/create', 'App\Http\Controllers\BooksController@create');
+Route::post('/books', 'App\Http\Controllers\BooksController@store');
+Route::get('/books/{books}', 'App\Http\Controllers\BooksController@show');
+Route::get('/books/{books}/edit', 'App\Http\Controllers\BooksController@edit');
+Route::patch('/books/{books}', 'App\Http\Controllers\BooksController@update');
+//Route::patch('/books/{id}', 'App\Http\Controllers\BooksController@updateDetails');
 
+Route::get('/authors', 'App\Http\Controllers\AuthorsController@index');
+Route::get('/authors/create', 'App\Http\Controllers\AuthorsController@create');
+Route::post('/authors', 'App\Http\Controllers\AuthorsController@store');
+Route::get('/authors/{authors}', 'App\Http\Controllers\AuthorsController@show');
+Route::get('/authors/{authors}/edit', 'App\Http\Controllers\AuthorsController@edit');
+Route::patch('/authors/{authors}', 'App\Http\Controllers\AuthorsController@update');
+//Route::PATCH('/authors/{id}', 'App\Http\Controllers\AuthorsController@updateAuthor');
