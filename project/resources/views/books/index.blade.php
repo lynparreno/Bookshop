@@ -26,12 +26,12 @@
             </tr>
             </thead>
             <tbody>
-               @foreach($books as $booklist)
+               @foreach($books as $book)
                <tr>
-                  <td>{{ $booklist->isbn }}</td>
-                  <td><a href="/books/{{ $booklist->id }}">{{ $booklist->title }}</td>
-                  <td><a href="/authors/{{$booklist->authors_id}}">{{$booklist->authors->lastname}}, {{ $booklist->authors->initials }}</td>
-                  <td><a href="/books/{{$booklist->id}}/edit">Edit</td>
+                  <td>{{ $book->isbn }}</td>
+                  <td><a href="/books/{{ $book->id }}">{{ $book->title }}</td>
+                  <td><a href="/authors/{{$book->author_id}}">{{ $book->author->full_name }}</td>
+                  <td><a href="/books/{{$book->id}}/edit">Edit</td>
                </tr>
                @endforeach
             </tbody>
