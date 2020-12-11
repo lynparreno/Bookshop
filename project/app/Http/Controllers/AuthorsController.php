@@ -59,15 +59,6 @@ class AuthorsController extends Controller
 
     public function update(Author $authors)
     {
-        //$authors = Author::find($id);
-/*
-        $authors->initials = request('initials');
-        $authors->lastname = request('lastname');
-        $authors->age = request('age');
-        $authors->country = request('country');
-
-        $authors->save();
-        return redirect('/authors');*/
         $data = request()->validate([
             'lastname' => 'required|min:3',
             'initials' => 'required',
