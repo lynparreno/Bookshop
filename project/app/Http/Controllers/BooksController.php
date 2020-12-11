@@ -9,16 +9,13 @@ use Illuminate\Http\Request;
 
 class BooksController extends Controller
 {
-    public function listBooks()
+    public function index()
     {
-        //$booklist = Book::all();
-        $booklist = Book::orderBy('title', 'ASC')->simplePaginate(50);
+
+        $books = Book::orderBy('title', 'ASC')->simplePaginate(50);
         $authors = Author::all();
 
-        return view('books.books', [
-            'books' => $booklist,
-            'authors' => $authors,
-        ]);
+        return view('books.index', compact('books', 'authors'));
 
     }
 
@@ -33,42 +30,40 @@ class BooksController extends Controller
         ]);
         
         Book::create($data);
-        return redirect('/books')->with('success', 'Item has been successfully added in the database');
+        return redirect('/books');
+
     }
 
-    public function addBook()
+    public function create()
     {
-        $books = Book::all();
+        $authors = Author::orderBy('lastname', 'ASC')->get(); 
+        return view('books.create', compact('authors'));
+
+    }
+
+    public function show(Book $books)
+    {
+        $authors = Author::all();
+        return view('books.show', compact('books', 'authors'));
+    }
+
+    public function edit(Book $books)
+    {
         $authors = Author::orderBy('lastname', 'ASC')->get();
-
-        return view('books.add', [
-            'books' => $books,
-            'authors' => $authors,
-        ]);
+        return view('books.edit', compact('books', 'authors'));
     }
 
-    public function showDetails($id)
+    public function update(Book $books)
     {
-        $books = Book::find($id);
-        //$authors = Author::all();
-        $authors = Author::orderBy('lastname', 'ASC')->get();
-
-        return view('books.show', [
-            'books' => $books,
-            'authors' => $authors,
-        ]);
-    }
-
-    public function updateDetails($id)
-    {
-        $books = Book::find($id);
         
-        $books->isbn = request('isbn');
-        $books->title = request('title');
-        $books->authors_id = request('authors_id');
-        $books->pages = request('pages');
+        $data = request()->validate([
+            'title' => 'required|min:3',
+            'isbn' => 'required|digits:8',
+            'authors_id' => 'required',
+            'pages' => 'required'
+        ]);
 
-        $books->save();
-        return redirect('/books')->with('success', 'Item has been successfully updated');
+        $books->update($data);
+        return redirect('/books/' . $books->id);
     }
 }

@@ -9,7 +9,7 @@ use App\Models\Book;
 
 class AuthorsController extends Controller
 {
-    public function listAuthors()
+    public function index()
     {
         $books = Book::all();
         $authors = Author::orderBy('lastname', 'ASC')->simplePaginate(50);
@@ -21,37 +21,60 @@ class AuthorsController extends Controller
                         ->groupBy('authors_id')
                         ->get(); 
         
-        return view('authors.authors', [
-            'authors' => $authors,
-            'books' => $books,
-            'averagebooks' => $averagebooks,
-            'numcountries' => $numcountries,
-            'ave_age' => $ave_age,
-        ]);
+        return view('authors.index', compact('books', 'authors', 'averagebooks', 'numcountries', 'ave_age'));
+    }
+
+    public function create()
+    {
+        return view('authors.create');
 
     }
 
-    public function authorDetails($id)
+    public function store()
     {
-        $authors = Author::find($id);
-        $books =  Book::where('authors_id', $id)->get();
 
-        return view('authors.show', [
-            'authors' => $authors,
-            'books' => $books,
+        $data = request()->validate([
+            'lastname' => 'required|min:3',
+            'initials' => 'required',
+            'age' => 'required|digits:2',
+            'country' => 'required'
         ]);
+        
+        Author::create($data);
+        return redirect('/authors');
+
     }
 
-    public function updateAuthor($id)
+    public function show(Author $authors)
     {
-        $authors = Author::find($id);
+        $books =  Book::where('authors_id', $authors->id)->get();
+        return view('authors.show', compact('authors', 'books'));
+    }
 
+    public function edit(Author $authors)
+    {
+        $books =  Book::where('authors_id', $authors->id)->get();
+        return view('authors.edit', compact('authors', 'books'));
+    }
+
+    public function update(Author $authors)
+    {
+        //$authors = Author::find($id);
+/*
         $authors->initials = request('initials');
         $authors->lastname = request('lastname');
         $authors->age = request('age');
         $authors->country = request('country');
 
         $authors->save();
-        return redirect('/authors')->with('success', 'Item has been successfully updated');
+        return redirect('/authors');*/
+        $data = request()->validate([
+            'lastname' => 'required|min:3',
+            'initials' => 'required',
+            'age' => 'required|digits:2',
+            'country' => 'required'
+        ]);
+        $authors->update($data);
+        return redirect('/authors/' . $authors->id);
     }
 }
