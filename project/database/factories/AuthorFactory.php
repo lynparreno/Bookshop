@@ -21,14 +21,11 @@ class AuthorFactory extends Factory
      */
     public function definition()
     {
-        $firstName = $this->faker->firstName;
-        $middleName = $this->faker->firstName;
+        $firstInitial = $this->faker->firstName[0];
+        $middleInitial = $this->faker->firstName[0];
 
-        $initials = $firstName[0].". ".$middleName[0].".";
-
-        //$initials = $this->faker->firstName." ". $this->faker->firstName;
         return [
-            'initials' => $initials,
+            'initials' => "{$firstInitial}. {$middleInitial}.",
             'lastname' => $this->faker->lastName,
             'age' => $this->faker->randomNumber(2),
             'country' => $this->faker->country,
