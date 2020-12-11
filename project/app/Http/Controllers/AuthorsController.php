@@ -18,7 +18,7 @@ class AuthorsController extends Controller
         $averagebooks = DB::table('books')
                         ->select(DB::raw('count(title) as bookcount'))
                         ->whereNotNull('id')
-                        ->groupBy('authors_id')
+                        ->groupBy('author_id')
                         ->get(); 
         
         return view('authors.index', compact('books', 'authors', 'averagebooks', 'numcountries', 'ave_age'));
@@ -45,19 +45,18 @@ class AuthorsController extends Controller
 
     }
 
-    public function show(Author $authors)
+    public function show(Author $author)
     {
-        $books =  Book::where('authors_id', $authors->id)->get();
-        return view('authors.show', compact('authors', 'books'));
+        return view('authors.show', compact('author'));
     }
 
-    public function edit(Author $authors)
+    public function edit(Author $author)
     {
-        $books =  Book::where('authors_id', $authors->id)->get();
-        return view('authors.edit', compact('authors', 'books'));
+        $books =  Book::where('author_id', $author->id)->get();
+        return view('authors.edit', compact('author', 'books'));
     }
 
-    public function update(Author $authors)
+    public function update(Author $author)
     {
         $data = request()->validate([
             'lastname' => 'required|min:3',
@@ -65,7 +64,7 @@ class AuthorsController extends Controller
             'age' => 'required|digits:2',
             'country' => 'required'
         ]);
-        $authors->update($data);
-        return redirect('/authors/' . $authors->id);
+        $author->update($data);
+        return redirect('/authors/' . $author->id);
     }
 }

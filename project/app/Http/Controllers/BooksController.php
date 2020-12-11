@@ -13,9 +13,8 @@ class BooksController extends Controller
     {
 
         $books = Book::orderBy('title', 'ASC')->simplePaginate(50);
-        $authors = Author::all();
 
-        return view('books.index', compact('books', 'authors'));
+        return view('books.index', compact('books'));
 
     }
 
@@ -41,29 +40,29 @@ class BooksController extends Controller
 
     }
 
-    public function show(Book $books)
+    public function show(Book $book)
     {
         $authors = Author::all();
-        return view('books.show', compact('books', 'authors'));
+        return view('books.show', compact('book', 'authors'));
     }
 
-    public function edit(Book $books)
+    public function edit(Book $book)
     {
         $authors = Author::orderBy('lastname', 'ASC')->get();
-        return view('books.edit', compact('books', 'authors'));
+        return view('books.edit', compact('book', 'authors'));
     }
 
-    public function update(Book $books)
+    public function update(Book $book)
     {
         
         $data = request()->validate([
             'title' => 'required|min:3',
             'isbn' => 'required|digits:8',
-            'authors_id' => 'required',
+            'author_id' => 'required',
             'pages' => 'required'
         ]);
 
-        $books->update($data);
-        return redirect('/books/' . $books->id);
+        $book->update($data);
+        return redirect('/books/' . $book->id);
     }
 }
