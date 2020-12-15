@@ -11,16 +11,12 @@ class BooksController extends Controller
 {
     public function index()
     {
-
         $books = Book::orderBy('title', 'ASC')->simplePaginate(50);
-
         return view('books.index', compact('books'));
-
     }
 
     public function store()
     {
-
         $data = request()->validate([
             'title' => 'required|min:3',
             'isbn' => 'required|digits:8',
@@ -30,14 +26,12 @@ class BooksController extends Controller
         
         Book::create($data);
         return redirect('/books');
-
     }
 
     public function create()
     {
         $authors = Author::orderBy('lastname', 'ASC')->get(); 
         return view('books.create', compact('authors'));
-
     }
 
     public function show(Book $book)

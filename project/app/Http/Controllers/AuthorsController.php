@@ -52,7 +52,8 @@ class AuthorsController extends Controller
 
     public function edit(Author $author)
     {
-        $books =  Book::where('author_id', $author->id)->get();
+        //$books =  Book::where('author_id', $author->id)->get();
+        $books = Book::authorId($author)->get();
         return view('authors.edit', compact('author', 'books'));
     }
 
