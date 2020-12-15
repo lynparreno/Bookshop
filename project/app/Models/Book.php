@@ -15,4 +15,8 @@ class Book extends Model
         return $this->belongsTo(Author::class);
     }
 
+    public function scopeAuthorId($query, $author)
+    {
+        return $query->where('author_id', $author->id);
+    }
 }
