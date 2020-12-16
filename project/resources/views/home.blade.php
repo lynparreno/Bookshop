@@ -3,7 +3,13 @@
 @section('title', 'My Bookshop')
 
 @section('content')
-    <h1>[Put image here]</h1>
+    <main role="main" class="container">
+    <div class="jumbotron mt-4">
+        <h1>Booknest</h1>
+        <p class="lead">Find your next great read on our virtual shelves and have your books delivered straight to your doorstep!</p>
+        <a class="btn btn-lg btn-primary" href="/books" role="button">View Library &raquo;</a>
+    </div>
+    </main>
     <h2>Welcome!</h2>
     <h6>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc accumsan aliquam nibh, sed placerat purus dapibus quis. 

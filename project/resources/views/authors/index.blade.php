@@ -50,6 +50,7 @@
                         <th>Author's Name</th>
                         <th>Age</th>
                         <th>Country of Origin</th>
+                        <th>Average Number of Pages</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -58,7 +59,8 @@
                 <tr>
                     <td><a href="/authors/{{ $author->id }}">{{ $author->full_name }}</td>
                     <td>{{ $author->age }}</td>
-                    <td>{{ $author->country }}</td>
+                    <td>{{ $author->country }}</td>        
+                    <td> {{ round($averagepagenum[$loop->index]->pagenum) }} </td>
                     <td><a href="/authors/{{$author->id}}/edit">Edit</td>
                 </tr>
                 @endforeach
