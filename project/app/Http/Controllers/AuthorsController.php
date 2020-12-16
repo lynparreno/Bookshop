@@ -20,8 +20,15 @@ class AuthorsController extends Controller
                         ->whereNotNull('id')
                         ->groupBy('author_id')
                         ->get(); 
+        $averagepagenum = DB::table('books')
+                        ->leftjoin('authors', 'books.author_id', '=', 'authors.id')
+                        ->select(DB::raw('avg(books.pages) as pagenum'))
+                        ->groupBy('author_id')
+                        ->orderBy('lastname', 'ASC')
+                        ->get()
+                        ->toArray();
         
-        return view('authors.index', compact('books', 'authors', 'averagebooks', 'numcountries', 'ave_age'));
+        return view('authors.index', compact('books', 'authors', 'averagebooks', 'numcountries', 'ave_age', 'averagepagenum'));
     }
 
     public function create()
